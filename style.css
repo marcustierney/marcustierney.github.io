@@ -19,6 +19,21 @@ header {
   margin-bottom: 20px;
 }
 
+.process {
+  background: #1c1c1c;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.snowdashtop {
+  background: #1c1c1c;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
 a {
   color: #4db8ff;
   text-decoration: none;
@@ -43,4 +58,32 @@ a {
 
 .about-text h2 {
   margin-bottom: 0.5rem;
+}
+
+.nav-links {
+  font-size: 25px;
+  font-weight: bold;
+  text-decoration: none;
+  list-style: none;    
+  display: flex;         
+  gap: 30px;             
+  padding: 0;
+  margin: 0;
+}
+
+.nav-links li {
+  display: inline;      
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+}
+
+.snowdash3 {
+  width: 70%;       
+  max-width: 500px;  
+  border-radius: 12px;
+  margin: 15px auto;
+  display: block;
 }
