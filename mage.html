@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mage Fight | Marcus Tierney</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="snowdash.html">Snow Dash</a></li>
+        <li><a href="boba.html">Boba Simulator</a></li>
+        <li><a href="mage.html" class="active">Mage Fight</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section class="snowdashtop">
+      <h1>Mage Fight (Unity)</h1>
+      <p><em>October 2025</em></p>
+
+      <img src="assets/images/mage4.png" alt="Mage Fight Gameplay Screenshot" class="magefight">
+
+      <p>
+        2D top-down Rogue-like/Survival hybrid game. The core pillars of the game are crafting 
+         spell casting system using a flexible spell-system, collecting relics, which give the players 
+         additional advantages, and fighting against (and defeating) the incoming monsters.
+      </p>
+
+      <p><strong>Team:</strong> Worked with a team of 4 people.</p>
+      <p><strong>Responsibilities:</strong> Randomized relic and spell drops, inventory management, 
+        runtime validation of inventory items, and dynamic UI updates, relic system that effects player stats and gameplay mechanics,
+        crafting system for spells and relics.</p>
+      <p><strong>Tech:</strong> Unity, C#</p>
+
+      <div class="project-links">
+        <a href="https://play.unity.com/en/games/899d77f2-2da0-4b96-b89f-e9d9775a09a0/webgl-builds" target="_blank" rel="noopener noreferrer" class="links"><strong>Play (Web Build)</strong></a>
+        <span> • </span>
+        <a href="https://youtu.be/JOV3dKxafD4" target="_blank" rel="noopener noreferrer" class="links"><strong>Gameplay Video</strong></a>
+      </div>
+    </section>
+        <section class="process">
+      <h1>Process</h1>
+      <p><em>Inital Prototype (No Inventory)</em></p>
+      <img src="assets/images/mage3.png" alt="Snow Dash Gameplay Screenshot" class="snowdash3">
+        <p><em>JSON File Formatting</em></p>
+        <img src="assets/images/mage5.png" alt="Mage Fight Gameplay Screenshot" class="magejson">
+        <p><em>Gameplay Clip</em></p>
+        <video class="snowdash3" controls width="700" preload="metadata">
+            <source src="assets/videos/MageVideo1.mp4" type="video/mp4">
+        </video>
+        <h2><strong>Summary of Contributions</strong></h2>
+          <h3><em>Reverse Polish Notation</em></h3>
+          <p>Developed a standalone .NET Reverse Polish Notation (RPN) library with stack-based evaluation and variable support, integrated into Unity to dynamically compute JSON-defined enemy spawn counts and stat scaling.</p>
+          <p>This system allowed for flexible and scalable game design, enabling designers to easily modify enemy behavior and difficulty scaling without requiring code changes to the system.</p>
+          <h3><em>Enemy Spawning</em></h3>
+          <p>Designed multiple difficulty modes (Easy, Medium, Endless) with scalable enemy counts, compositions, and stat growth per wave.</p>
+          <p>Built a JSON-driven configuration system defining enemy types, spawn rules, stat overrides, sequencing patterns, delays, and spawn locations.</p>
+          <p>Implemented cyclical spawn sequencing logic to control grouped enemy spawns with timed delays and randomized spawn-point selection.</p>
+          <h3><em>Spell Modifiers</em></h3>
+          <p>Players can equip up to four spells at a time, each displaying mana cost, estimated damage, and cooldown in the UI. Spells consist of core properties (mana cost, damage, cooldown, projectile behavior, and spell power) that can be modified by randomized modifiers earned after each wave, allowing players to acquire dynamically generated spell variations such as higher-damage homing bolts or multi-cast explosive attacks.</p>
+          <p>Implemented relic UI systems to display current player relics on screen.</p>
+          <h3><em>Crafting System</em></h3>
+          <p>Implemented a randomized spell component and crafting system, adding a 33% drop chance for spell components upon enemy defeat. A spell component is either a base spell or a modifier that players collect and combine to construct and customize their active spells.</p>
+          <p>Designed an inventory UI system to store and display collected components, allowing players to manage and modify active spells between rounds.</p>
+    </section>
+        <section class="process">
+      <h1>What I Learned</h1>
+          <h3><em>Data Driven Systems</em></h3>
+          <p>By implementing JSON-driven enemy spawning, a modular spell crafting framework, and a trigger-effect relic architecture, I learned how powerful data-driven design can be for balancing and expanding gameplay without rewriting core logic.</p>
+          <p>Separating configuration from behavior made iteration easier and reinforced the importance of clean architecture in game development.</p>
+          <h3><em>Event Bus</em></h3>
+          <p>Integrating relic triggers into the EventBus required me to understand how different gameplay systems communicate with one another.</p>
+          <p>I modified multiple core systems such as the GameManager, PlayerController, and EnemyController to respond to events dynamically rather than relying on private functions without calls from other files.</p>
+          <p>This experience made me understand decoupled design patterns and how to build systems that are more flexible and clean.</p>
+          <h3><em>Managing Complex UI and Game State</em></h3>
+          <p>Implementing the inventory and crafting UI systems required me to manage complex game state and ensure that the UI accurately reflected the player's current spells, components, and relics.</p>
+          <p>This familiarized me with Unity's UI systems that are responsive to things like game state changes and player inventory.</p>
+    </section>
+  </main>
+</body>
+</html>
