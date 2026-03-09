@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>God's Judgment | Marcus Tierney</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="godsjudgment.html" class="active">God's Judgment</a></li>
+        <li><a href="snowdash.html">Snow Dash</a></li>
+        <li><a href="boba.html">Boba Simulator</a></li>
+        <li><a href="mage.html">Mage Fight</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section class="snowdashtop">
+      <h1>God's Judgment</h1>
+      <img src="assets/images/godsjudgement.png" alt="God's Judgment Gameplay Screenshot" class="magefight">
+
+      <p>
+        God's Judgement is a strategy simulation where you manage a small village while an AI-controlled god observes and judges your actions. Gather resources, train troops, and defend your settlement as the god dynamically rewards or punishes the village based on the state of the world. The deity uses a utility-based AI system to decide when to spawn enemies, bless your army, cause famine, or unleash destructive events like earthquakes. Each playthrough features a different divine personality, making the god more aggressive, greedy, or chaotic. To survive, players must adapt their strategy and learn how to endure the unpredictable trials sent from above.
+      </p>
+      <p><strong>Responsibilities: </strong>Solo Developer</p>
+      <p><strong>Tech:</strong> Unity, C#</p>
+
+      <div class="project-links">
+        <a href="https://marcustierney.itch.io/gods-judgement" target="_blank" rel="noopener noreferrer" class="links"><strong>Play (Itch.io)</strong></a>
+        <span> • </span>
+        <a href="https://play.unity.com/en/games/09867cea-f999-4e97-ba6f-2858e07ddf6b/gods-judgement" target="_blank" rel="noopener noreferrer" class="links"><strong>Play (Web Build)</strong></a>
+        <span> • </span>
+        <a href="https://youtu.be/qsOCw2iN85g" target="_blank" rel="noopener noreferrer" class="links"><strong>Gameplay Video</strong></a>
+        <span> • </span>
+        <a href="https://github.com/marcustierney/GodsJudgement" target="_blank" rel="noopener noreferrer" class="links"><strong>Github Repo</strong></a>
+      </div>
+    </section>
+        <section class="process">
+      <h1>Process</h1>
+      <p><em>Inital Idea</em></p>
+      <img src="assets/images/godsjudgement1.png" alt="God's Judgment Inital Screenshot" class="snowdash3">
+        <p><em>Interaction Testing</em></p>
+        <video class="snowdash3" controls width="700" preload="metadata">
+            <source src="assets/videos/godjudgement.mp4" type="video/mp4">
+        </video>
+        <p><em>Inital Prototype</em></p>
+        <video class="snowdash3" controls width="700" preload="metadata">
+            <source src="assets/videos/godjudgement1.mp4" type="video/mp4">
+        </video>
+        <h2><strong>Summary of Contributions</strong></h2>
+          <p>Designed and implemented a utility-based AI system for an unpredictable deity that dynamically rewards or punishes the player based on village state, resources, and troop activity.</p>
+          <p>Developed a modular village management simulation, including AI-controlled friendly troops, resource generation, troop training, and enemy spawning mechanics.</p>
+          <p>Created a dynamic reward/punishment framework that ties the god's personality traits (aggression, greed, chaos) to gameplay outcomes like troop buffs, famine events, earthquakes, and enemy spawns.</p>
+          <p>Implemented a procedural god personality generator to ensure each playthrough features unique challenges and emergent gameplay.</p>
+
+    </section>
+        <section class="process">
+      <h1>What I Learned</h1>
+          <h3><em>Learning Utility AI and Procedural Systems</em></h3>
+        <p>Going into this project, I had never implemented a utility-based AI system or a procedural personality generator in a game.</p>
+        <p>I had to figure out how to have the AI observe the world, calculate action utilities, and make meaningful decisions that affect gameplay dynamically.</p>
+        <p>Integrating the god's personality traits with rewards and punishments for the village required many trial-and-error iterations, balancing emergent gameplay with player agency.</p>
+        <p>Step by step, I learned how to build AI that can reason about multiple actions, respond to changing resources and unit counts, and create a challenging but fair player experience.</p>
+          <h3><em>Strengthening Unity/3D Game Engine Skills</em></h3>
+        <p>I also deepened my understanding of Unity's systems, including event-driven programming, physics for unit movement, resource management, and coroutines for timed actions.</p>
+        <p>Through this project, I learned to combine multiple systems—AI, resource management, and gameplay mechanics into something playable and visually appealing.</p>
+        <p>I now have a stronger mental map of Unity's architecture, which makes developing future 3D strategy and simulation games significantly easier.</p>
+    </section>
+  </main>
+</body>
+</html>
