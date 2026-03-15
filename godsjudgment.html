@@ -26,7 +26,7 @@
       <img src="assets/images/godsjudgement.png" alt="God's Judgment Gameplay Screenshot" class="magefight">
 
       <p>
-        God's Judgement is a strategy simulation where you manage a small village while an AI-controlled god observes and judges your actions. Gather resources, train troops, and defend your settlement as the god dynamically rewards or punishes the village based on the state of the world. The deity uses a utility-based AI system to decide when to spawn enemies, bless your army, cause famine, or unleash destructive events like earthquakes. Each playthrough features a different divine personality, making the god more aggressive, greedy, or chaotic. To survive, players must adapt their strategy and learn how to endure the unpredictable trials sent from above.
+        God's Judgement is a strategy simulation where you manage a small village while a god observes and judges your actions. Gather resources, train troops, and defend your settlement as the god dynamically rewards or punishes the village based on the state of the world. The deity uses a utility-based game-AI system to decide when to spawn enemies, bless your army, cause famine, or unleash destructive events like earthquakes. Each playthrough features a different divine personality, making the god more aggressive, greedy, or chaotic. To survive, players must adapt their strategy and learn how to endure the unpredictable trials sent from above.
       </p>
       <p><strong>Responsibilities: </strong>Solo Developer</p>
       <p><strong>Tech:</strong> Unity, C#</p>
@@ -54,23 +54,46 @@
             <source src="assets/videos/godjudgement1.mp4" type="video/mp4">
         </video>
         <h2><strong>Summary of Contributions</strong></h2>
-          <p>Designed and implemented a utility-based AI system for an unpredictable deity that dynamically rewards or punishes the player based on village state, resources, and troop activity.</p>
-          <p>Developed a modular village management simulation, including AI-controlled friendly troops, resource generation, troop training, and enemy spawning mechanics.</p>
-          <p>Created a dynamic reward/punishment framework that ties the god's personality traits (aggression, greed, chaos) to gameplay outcomes like troop buffs, famine events, earthquakes, and enemy spawns.</p>
-          <p>Implemented a procedural god personality generator to ensure each playthrough features unique challenges and emergent gameplay.</p>
+          <h4><em>Resource and Building System</em></h4>
+          <p>The foundation of the game is a singleton ResourceManager that tracks food, wood, troop count and maximum troop capacity as live float values. Every system in the game reads from and writes to this manager. Buildings consume wood on placement, farms generate food over time, and lumbermills generate wood passively.</p>
+          <p>Building placement is handled by BuildingPlacer, which spawns a preview of the selected building that follows the mouse cursor in real time. The preview uses Physics.OverlapBox to check for collisions with existing buildings. Placement is then snapped to a 1-unit grid via Mathf.Round.</p>
+          <p>Each building type has its own script handling its specific behavior. Barracks spawns troops on a timer, Lumbermill adds wood every second, Turret detects the nearest enemy within range and fires arrows toward it, and BuildingHealth handles click-to-heal interactions using the New Input System with an EventSystem UI guard to prevent clicks on UI buttons from accidentally healing buildings behind them.</p>
+          <h4><em>Troop AI | Utility Brain</em></h4>
+          <p>Player troops use a utility-based AI system rather than a traditional finite state machine. Every 0.5 seconds, UtilityBrain calls CalculateUtility on every action available to the troop and executes whichever one returns the highest float score between 0.0 and 1.0.</p>
+          <h4><em>Enemy AI</em></h4>
+          <p>Enemies use a simpler deterministic priority-based targeting system via EnemyBrain. Every 0.5 seconds enemies evaluate targets in strict descending priority. This was a deliberate design decision as enemies are intentionally predictable so that walls and troop positioning feel meaningful as defensive tools.</p>
+          <h4><em>God AI | Personality System</em></h4>
+          <p>The god system is the most complex and central system in the game. On each new game, GodManager randomizes a GodPersonality across three independent axes:</p>
+          <p><bold>Morality - Peaceful or Violent</bold></p>
+          <p><bold>Style - Wild or Modern</bold></p>
+          <p><bold>Consumption - Glutton or Abundant</bold></p>
+          <p>Each axis has its own float satisfaction value initialized at 0.5, calculated every tick from live game data held in GodContext.</p>
+          <p>Morality satisfaction uses a rolling 10-second death window. Every 10 seconds the system counts all troop and enemy deaths in that window and compares against a threshold of 5. A Peaceful god gains satisfaction when few deaths occur and loses it during heavy combat. A Violent god is the exact inverse — it wants blood.</p>
+          <p>Style satisfaction is calculated geometrically. GodManager computes the average pairwise distance between every building in the village. A Wild god scores Clamp01(spread / 40f). It wants buildings scattered across the map. A Modern god scores the inverse. It wants a tight clustered village.</p>
+          <p>Consumption satisfaction maps the player's total food plus wood against a ceiling of 500 units. An Abundant god wants the player to stockpile resources while a Glutton god reversely wants resources to be low; it is satisfied by scarcity.</p>
+          <h4><em>God Action Utility System</em></h4>
+          <p>Every 10 seconds GodManager evaluates all god actions using the same utility scoring pattern as the troop AI. Each GodAction subclass implements CalculateUtility returning a float score and Execute containing the actual effect. Only the single highest scoring action fires per tick.</p>
+          <p>Punishment actions fire when satisfaction is low and include SpawnEnemiesAction, EarthquakeAction, FamineAction, and DesertTroopsAction.</p>
+          <p>Reward actions fire when satisfaction is high and include BuffTroopsAction, HealTroopsAction, and ArmorTroopsAction.</p>
+          <h4><em>Hint and Feedback System</em></h4>
+          <p>Since the god's personality is never directly shown, the game communicates through an indirect hint system. Every tick GodManager compares current satisfaction values against the previous tick's values. If any satisfaction changes by more than 0.10f in either direction a hint popup appears on screen. Popups fade in and out via a CanvasGroup and stack vertically if multiple hints fire in quick succession.</p>
+          <h4><em>Wave and Spawn System</em></h4>
+          <p>WaveSpawner manages a two-phase timer. A short countdown before each wave and a longer rest period between waves. Enemy count scales as baseEnemiesPerWave + (currentWave - 1) * enemiesAddedPerWave, modified at game start by the selected difficulty which adjusts base count, wave frequency and countdown duration. The god can add additional enemies at any time via WaveSpawner.SpawnBonus, bypassing the wave timer entirely as a punishment.</p>
+          <h4><em>Persistence and Scene Management</em></h4>
+          <p>Cross-scene data is carried by DontDestroyOnLoad singletons including DifficultyData, MusicManager, AudioManager, and GameOverData.</p>
+
 
     </section>
         <section class="process">
       <h1>What I Learned</h1>
           <h3><em>Learning Utility AI and Procedural Systems</em></h3>
         <p>Going into this project, I had never implemented a utility-based AI system or a procedural personality generator in a game.</p>
-        <p>I had to figure out how to have the AI observe the world, calculate action utilities, and make meaningful decisions that affect gameplay dynamically.</p>
-        <p>Integrating the god's personality traits with rewards and punishments for the village required many trial-and-error iterations, balancing emergent gameplay with player agency.</p>
-        <p>Step by step, I learned how to build AI that can reason about multiple actions, respond to changing resources and unit counts, and create a challenging but fair player experience.</p>
-          <h3><em>Strengthening Unity/3D Game Engine Skills</em></h3>
-        <p>I also deepened my understanding of Unity's systems, including event-driven programming, physics for unit movement, resource management, and coroutines for timed actions.</p>
-        <p>Through this project, I learned to combine multiple systems—AI, resource management, and gameplay mechanics into something playable and visually appealing.</p>
-        <p>I now have a stronger mental map of Unity's architecture, which makes developing future 3D strategy and simulation games significantly easier.</p>
+        <p>Developing this system required designing an AI architecture that continuously evaluates the current world state, derives contextual information, and calculates utility scores for a set of possible actions.</p>
+        <p>Through this process I gained experience designing modular AI systems capable of evaluating multiple competing actions and adapting to dynamic world conditions.</p>
+          <h3><em>Utility AI over HFSM</em></h3>
+        <p>Initially, I visiualized using a hierarchical finite state machine (HFSM) for the god's behavior, quickly into the designing process I realized it would have required explicit transition logic for every combination of personality type and satisfaction level.</p>
+        <p>This would have meant writing large numbers of state transitions just to handle situations like low resources, high troop counts, or repeated troop deaths. As more personality traits and actions were added, the number of transitions would grow exponentially and become difficult to manage.</p>
+        <p>I therefore decided to implement the utility-based approach instead.</p>
     </section>
   </main>
 </body>
