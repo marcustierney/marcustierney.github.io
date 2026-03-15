@@ -54,15 +54,15 @@
             <source src="assets/videos/godjudgement1.mp4" type="video/mp4">
         </video>
         <h2><strong>Summary of Contributions</strong></h2>
-          <h4><em>Resource and Building System</em></h4>
+          <h3><em>Resource and Building System</em></h3>
           <p>The foundation of the game is a singleton ResourceManager that tracks food, wood, troop count and maximum troop capacity as live float values. Every system in the game reads from and writes to this manager. Buildings consume wood on placement, farms generate food over time, and lumbermills generate wood passively.</p>
           <p>Building placement is handled by BuildingPlacer, which spawns a preview of the selected building that follows the mouse cursor in real time. The preview uses Physics.OverlapBox to check for collisions with existing buildings. Placement is then snapped to a 1-unit grid via Mathf.Round.</p>
           <p>Each building type has its own script handling its specific behavior. Barracks spawns troops on a timer, Lumbermill adds wood every second, Turret detects the nearest enemy within range and fires arrows toward it, and BuildingHealth handles click-to-heal interactions using the New Input System with an EventSystem UI guard to prevent clicks on UI buttons from accidentally healing buildings behind them.</p>
-          <h4><em>Troop AI | Utility Brain</em></h4>
+          <h3><em>Troop AI | Utility Brain</em></h3>
           <p>Player troops use a utility-based AI system rather than a traditional finite state machine. Every 0.5 seconds, UtilityBrain calls CalculateUtility on every action available to the troop and executes whichever one returns the highest float score between 0.0 and 1.0.</p>
-          <h4><em>Enemy AI</em></h4>
+          <h3><em>Enemy AI</em></h3>
           <p>Enemies use a simpler deterministic priority-based targeting system via EnemyBrain. Every 0.5 seconds enemies evaluate targets in strict descending priority. This was a deliberate design decision as enemies are intentionally predictable so that walls and troop positioning feel meaningful as defensive tools.</p>
-          <h4><em>God AI | Personality System</em></h4>
+          <h3><em>God AI | Personality System</em></h3>
           <p>The god system is the most complex and central system in the game. On each new game, GodManager randomizes a GodPersonality across three independent axes:</p>
           <p><bold>Morality - Peaceful or Violent</bold></p>
           <p><bold>Style - Wild or Modern</bold></p>
@@ -71,15 +71,15 @@
           <p>Morality satisfaction uses a rolling 10-second death window. Every 10 seconds the system counts all troop and enemy deaths in that window and compares against a threshold of 5. A Peaceful god gains satisfaction when few deaths occur and loses it during heavy combat. A Violent god is the exact inverse.</p>
           <p>Style satisfaction is calculated geometrically. GodManager computes the average pairwise distance between every building in the village. A Wild god scores Clamp01(spread / 40f). It wants buildings scattered across the map. A Modern god scores the inverse. It wants a tight clustered village.</p>
           <p>Consumption satisfaction maps the player's total food plus wood against a ceiling of 500 units. An Abundant god wants the player to stockpile resources while a Glutton god reversely wants resources to be low.</p>
-          <h4><em>God Action Utility System</em></h4>
+          <h3><em>God Action Utility System</em></h3>
           <p>Every 10 seconds GodManager evaluates all god actions using the same utility scoring pattern as the troop AI. Each GodAction subclass implements CalculateUtility returning a float score and Execute containing the actual effect. Only the single highest scoring action fires per tick.</p>
           <p>Punishment actions fire when satisfaction is low and include SpawnEnemiesAction, EarthquakeAction, FamineAction, and DesertTroopsAction.</p>
           <p>Reward actions fire when satisfaction is high and include BuffTroopsAction, HealTroopsAction, and ArmorTroopsAction.</p>
-          <h4><em>Hint and Feedback System</em></h4>
+          <h3><em>Hint and Feedback System</em></h3>
           <p>Since the god's personality is never directly shown, the game communicates through an indirect hint system. Every tick GodManager compares current satisfaction values against the previous tick's values. If any satisfaction changes by more than 0.10f in either direction a hint popup appears on screen. Popups fade in and out via a CanvasGroup and stack vertically if multiple hints fire in quick succession.</p>
-          <h4><em>Wave and Spawn System</em></h4>
+          <h3><em>Wave and Spawn System</em></h3>
           <p>WaveSpawner manages a two-phase timer. A short countdown before each wave and a longer rest period between waves. Enemy count scales as baseEnemiesPerWave + (currentWave - 1) * enemiesAddedPerWave, modified at game start by the selected difficulty which adjusts base count, wave frequency and countdown duration. The god can add additional enemies at any time via WaveSpawner.SpawnBonus, bypassing the wave timer entirely as a punishment.</p>
-          <h4><em>Persistence and Scene Management</em></h4>
+          <h3><em>Persistence and Scene Management</em></h3>
           <p>Cross-scene data is carried by DontDestroyOnLoad singletons including DifficultyData, MusicManager, AudioManager, and GameOverData.</p>
 
 

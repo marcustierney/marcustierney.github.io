@@ -32,7 +32,7 @@
       </p>
 
       <p><strong>Team:</strong> Worked with a team of 5 people.</p>
-      <p><strong>Responsibilities:</strong> Implemented climbing and grapple mechanics, random player spawn points, and procedural mesh generation.</p>
+      <p><strong>Responsibilities:</strong> Implemented climbing and grapple mechanics, random player spawn points, and modified procedural mesh generation.</p>
       <p><strong>Tech:</strong> Unity, C#</p>
 
       <div class="project-links">
@@ -52,28 +52,33 @@
             <source src="assets/videos/SnowDashvideo.mp4" type="video/mp4">
         </video>
         <h2><strong>Summary of Contributions</strong></h2>
-          <h3><em>Implemented Climbing and Grapple Mechanics</em></h3>
-          <p>Designed and implemented climbing and grapple mechanics to enhance player movement and navigation.</p>
-          <p>Created a system for detecting climbable surfaces and implementing climbing interactions.</p>
-          <p>Developed a grapple mechanic that allows players to swing across gaps and reach otherwise inaccessible areas.</p>
+          <h3><em>Climbing Mechanic</em></h3>
+          <p>Implemented a stamina-based wall climbing system in Unity using Rigidbody physics and raycast-based surface detection.</p>
+          <p>The system casts a forward ray to detect climbable surfaces on a designated layer and verifies the wall angle to ensure it is steep enough to climb. When a valid surface is detected and the climb input is held, the player enters a climbing state where gravity is temporarily disabled and vertical velocity is applied to move the player upward along the wall.</p>
+          <p>The system includes a stamina resource that depletes during climbing and regenerates when not in use, preventing indefinite climbing. To improve gameplay feel, a short wall-contact grace timer allows the player to continue climbing briefly if the raycast temporarily loses contact with the surface.</p>
+          <p>The mechanic also integrates animation state transitions and climbing sound effects, while restoring gravity and exiting the climb state when stamina is depleted or the player leaves the wall.</p>
+          <h3><em>Grapple Mechanic</em></h3>
+          <p>Created a grapple system that uses camera-based raycasting to detect valid grapple targets within a specified distance and layer mask.</p>
+          <p>When a valid surface is detected, the grapple point is stored and the player enters a grappling state where standard movement input is temporarily overridden. During this state, gravity is disabled and the player is pulled toward the grapple point using Rigidbody velocity in the direction of the target.</p>
+          <p>A stop distance determines when the player reaches the grapple point, at which time the system restores gravity and normal movement control.</p>
+          <p>The mechanic includes a cooldown timer to prevent rapid re-use and dynamically renders the grappling cable using a LineRenderer.</p>
           <h3><em>Random Player Spawn Points</em></h3>
-          <p>Implemented a system for randomly spawning the player at different locations on the map to increase replayability and challenge.</p>
-          <p>Ensured that spawn points were strategically placed to provide a balanced gameplay experience.</p>
+          <p>The random spawn points system iterates through the mesh's vertices, converts them to world-space coordinates, and filters for valid spawn candidates based on elevation constraints to ensure the player spawns on relatively flat ground.</p>
+          <p>A random vertex from the filtered set is then selected and used as the player's spawn location, with a fallback position if no valid vertices are found.</p>
+          <p>The final spawn position is adjusted vertically to prevent ground clipping before placing the player in the scene. This approach ensures consistent and varied player spawn locations that adapt automatically to changes in the procedurally generated terrain.</p>
           <h3><em>Procedural Mesh Generation</em></h3>
-          <p>Created a procedural mesh generation system to dynamically generate terrain and obstacles in the game world.</p>
-          <p>Implemented algorithms for generating realistic mountain terrain and obstacles that fit the game's aesthetic and gameplay requirements.</p>
+          <p>Modified the procedural mesh generation system to dynamically generate terrain and obstacles in the game world in harmony with the movement mechanics and random spawn system.</p>
+          <p>This was done by tweaking the octave, persistence, heightMultiplier, and scale parameters.</p>
     </section>
         <section class="process">
       <h1>What I Learned</h1>
-          <h3><em>Procedural Mesh Generation is Hard</em></h3>
-          <p>Implementing procedural mesh generation was a significant challenge that required an understanding of 3D geometry, algorithms, and optimization techniques.</p>
-          <p>It involved using complex algorithms to generate terrain and obstacles that were both visually appealing and functional within the game world.</p>
-          <p>I learned how to optimize the mesh generation process to ensure smooth performance while maintaining the desired level of detail.</p>
-          <h3><em>Collaboration and Communication are Key</em></h3>
-          <p>Working with a team of 5 people highlighted the importance of effective collaboration and communication in game development.</p>
-          <p>Regular meetings, clear documentation, and open communication channels were essential for coordinating our efforts and ensuring that everyone was on the same page throughout the development process.</p>
-          <p>For example, initally one of my teammates was responsible for the mesh generation. However as I was responsible for the player movement mechanics and randomly spawning, I had to integrate and adapt their work to fit within our overall game design. Thus I ended up collaborating with my teammate to synchronize the mesh generation.</p>
-          <p>Through this experience, I learned how to effectively collaborate with others, share ideas, and resolve conflicts to create a cohesive and successful game.</p>
+          <h3><em>Using Physics Intentionally for Gameplay</em></h3>
+          <p>Working with the 3D Rigidbody system in Unity taught me how to balance physics intuitition and gameplay feel.</p>
+          <p>Instead of relying purely on forces, I sometimes directly controlled velocity to achieve responsive traversal mechanics like grappling pulls or controlled climbing movement.</p>
+          <h3><em>Handling Edge Cases in Movement Mechanics</em></h3>
+          <p>The wall detection raycast briefly lost contact with a climbable surface due to small geometry gaps or player movement. Without additional logic, this would immediately cancel the climbing state and cause the player to fall, resulting in frustrating gameplay.</p>
+          <p>The implemented a short grace timer that allowed climbing to continue for a brief moment after contact is lost, making the mechanic feel smoother.</p>
+          <p>Another edge case involved managing the stamina system during climbing. If stamina reached zero while the player was still climbing, the system needed to immediately stop the climb state, re-enable gravity, and prevent the player from reattaching to the wall until stamina had recovered.</p>
     </section>
   </main>
 </body>
