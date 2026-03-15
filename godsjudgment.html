@@ -68,9 +68,9 @@
           <p><bold>Style - Wild or Modern</bold></p>
           <p><bold>Consumption - Glutton or Abundant</bold></p>
           <p>Each axis has its own float satisfaction value initialized at 0.5, calculated every tick from live game data held in GodContext.</p>
-          <p>Morality satisfaction uses a rolling 10-second death window. Every 10 seconds the system counts all troop and enemy deaths in that window and compares against a threshold of 5. A Peaceful god gains satisfaction when few deaths occur and loses it during heavy combat. A Violent god is the exact inverse — it wants blood.</p>
+          <p>Morality satisfaction uses a rolling 10-second death window. Every 10 seconds the system counts all troop and enemy deaths in that window and compares against a threshold of 5. A Peaceful god gains satisfaction when few deaths occur and loses it during heavy combat. A Violent god is the exact inverse.</p>
           <p>Style satisfaction is calculated geometrically. GodManager computes the average pairwise distance between every building in the village. A Wild god scores Clamp01(spread / 40f). It wants buildings scattered across the map. A Modern god scores the inverse. It wants a tight clustered village.</p>
-          <p>Consumption satisfaction maps the player's total food plus wood against a ceiling of 500 units. An Abundant god wants the player to stockpile resources while a Glutton god reversely wants resources to be low; it is satisfied by scarcity.</p>
+          <p>Consumption satisfaction maps the player's total food plus wood against a ceiling of 500 units. An Abundant god wants the player to stockpile resources while a Glutton god reversely wants resources to be low.</p>
           <h4><em>God Action Utility System</em></h4>
           <p>Every 10 seconds GodManager evaluates all god actions using the same utility scoring pattern as the troop AI. Each GodAction subclass implements CalculateUtility returning a float score and Execute containing the actual effect. Only the single highest scoring action fires per tick.</p>
           <p>Punishment actions fire when satisfaction is low and include SpawnEnemiesAction, EarthquakeAction, FamineAction, and DesertTroopsAction.</p>
