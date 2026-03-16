@@ -48,10 +48,12 @@
             <source src="assets/videos/bobaproto.mp4" type="video/mp4">
         </video>
         <h2><strong>Summary of Contributions</strong></h2>
-          <h3><em>Sole designer for the game</em></h3>
-          <p>Implemented core interaction logic for the barista simulator</p>
-          <p>Created a sequence-based system for managing customer orders and interactions</p>
-          <p>Designed and implemented UI elements for displaying order information and progress</p>
+          <p>Designed and implemented a data-driven drink recipe system using enums, structs, and UE5 Data Tables to define boba drinks and required ingredients.</p>
+          <p>Built an interactive mixer gameplay system allowing players to select drinks, validate ingredient inventories, and produce drinks using timed crafting mechanics.</p>
+          <p>Developed a dynamic customer order system that generates randomized drink requests and validates player deliveries.</p>
+          <p>Implemented difficulty scaling mechanics where customer orders increase exponentially based on total orders served.</p>
+          <p>Created inventory and ingredient interaction systems enabling players to collect ingredients and use them in drink crafting.</p>
+          <p>Implemented a randomized ingredient spawn system that relocates ingredient pickups to different predefined locations after each completed customer order, increasing gameplay variety and requiring players to dynamically search the environment.</p>
     </section>
         </section>
         <section class="process">
@@ -66,7 +68,7 @@
           <p>However, this turned out to be completely wrong when dealing with many different interactions and lists, wires were entangled and hard to trace.</p>
           <p>Debugging became time-consuming and very very frustrating.</p>
           <p>In the future, I'll use blueprints for simple UI interactions and visual logic, but prefer C# for complex systems. I now know to use more public variables and split the blueprint logic into different function graphs.</p>
-        <p><em>Blueprint logic (I am well aware this looks atrocious)</em></p>    
+        <p><em>Blueprint logic</em></p>    
         <img src="assets/images/bobalogic.png" alt="Blueprint Logic Screenshot" class="snowdash3">
     </section>
   </main>
