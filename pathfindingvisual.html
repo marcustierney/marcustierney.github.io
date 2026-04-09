@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pathfinding Visualizer | Marcus Tierney</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="godsjudgment.html">God's Judgment</a></li>
+        <li><a href="snowdash.html">Snow Dash</a></li>
+        <li><a href="boba.html" class="active">Boba Simulator</a></li>
+        <li><a href="pathfindingvisual.html" class="active">Pathfinding Visualizer</a></li>
+        <li><a href="mage.html">Mage Fight</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section class="snowdashtop">
+      <h1>Pathfinding Visualizer</h1>
+      <img src="assets/images/pathfinding1.png" alt="Pathfinding Visualizer Gameplay Screenshot" class="magefight">
+
+      <p>
+        A grid-based pathfinding visualizer featuring BFS, DFS, Greedy, and A* algorithms. Users can interactively set start and end points, place walls, and watch the algorithms explore the grid in real-time. 
+      </p>
+      <p><strong>Responsibilities: </strong>Solo Developer</p>
+      <p><strong>Tech:</strong> C++, Blueprints</p>
+
+      <div class="project-links">
+        <a href="https://marcustierney.itch.io/pathfinding-visualizer" target="_blank" rel="noopener noreferrer" class="links"><strong>Play (Itch.io)</strong></a>
+        <span> • </span>
+        <a href="https://github.com/marcustierney/PathfindingVisualizer" target="_blank" rel="noopener noreferrer" class="links"><strong>Github Repo</strong></a>
+        <span> • </span>
+        <a href="https://www.youtube.com/watch?v=B_fxCCWgY0o&t=1s" target="_blank" rel="noopener noreferrer" class="links"><strong>Gameplay Video</strong></a>
+      </div>
+    </section>
+        <section class="process">
+      <h1>Process</h1>
+        <p><em>Set Up (Uses Grid and Cell Blueprint System)</em></p>
+        <img src="assets/images/pathfinding3.png" alt="Pathfinding Visualizer Setup" class="snowdash3">
+        <p><em>Grid Building and Algorithm Implementation Inside PathfindingGird.cpp File</em></p>
+        <img src="assets/images/pathfinding4.png" alt="Pathfinding Code Setup" class="snowdash3">
+        <h2><strong>Summary of Contributions</strong></h2>
+          <p>Designed and implemented a modular pathfinding system in Unreal Engine 5 using C++, supporting multiple search algorithms including BFS, DFS, Greedy Best-First, and A*.</p>
+          <p>Built a step-by-step visualization system using Unreal's timer framework to animate each algorithm's exploration and final path reconstruction allowing for direct visual comparison between algorithms.</p>
+          <p>Implemented all pathfinding algorithms in C++, queues for BFS, stacks for DFS, and priority-based open lists with closed sets for Greedy and A*.</p>
+          <p>Developed a correct and efficient A* implementation using 2D array-indexed GScore and parent tracking grids, with F-score tiebreaking via a G-score to stop exploring equivalent paths in the same way.</p>
+    </section>
+        </section>
+        <section class="process">
+      <h1>What I Learned</h1>
+            <h3><em>How Data Structures Directly Affect Behavior</em></h3>
+            <p>Switching BFS from a queue to a stack turns it into DFS. Sorting that stack by a heuristic turns it into Greedy. Adding a cost tracker turns Greedy into A*. Working through each algorithm in the same codebase made it clear that the choice of data structure is the algorithm.</p>
+            <h3><em>Understanding Algorithm Behavior Through Visualization</em></h3>
+            <p>This project helped me better understand how different pathfinding algorithms behave by visualizing them in real time. Seeing how algorithms like BFS, DFS, Greedy, and A* explore the grid made it easier to compare their efficiency, decision-making, and path quality. It showed how factors like heuristics and data structures affect performance, and gave me a more intuitive understanding beyond just reading the code.</p>
+    </section>
+  </main>
+</body>
+</html>
