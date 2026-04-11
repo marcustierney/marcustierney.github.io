@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mage Fight | Marcus Tierney</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="godsjudgment.html">God's Judgment</a></li>
+        <li><a href="snowdash.html">Snow Dash</a></li>
+        <li><a href="boba.html">Boba Simulator</a></li>
+        <li><a href="pathfindingvisual.html">Pathfinding Visualizer</a></li>
+        <li><a href="mage.html">Mage Fight</a></li>
+        <li><a href="laststick.html" class="active">The Last Stick</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section class="snowdashtop">
+      <h1>The Last Stick (Unity)</h1>
+      <img src="assets/images/laststick1.png" alt="The Last Stick Gameplay Screenshot" class="magefight">
+
+      <p>
+        2D level-based platformer with quirky movement mechanics, unique boss fights, and an inventory/resource management system.
+      </p>
+
+      <p><strong>Team:</strong> Worked with a team of 4 people.</p>
+      <p><strong>Responsibilities:</strong> Wrote over 30 scripts in C# to implement core gameplay mechanics such as player movement, boss fight logic, inventory management, health and damage systems, and UI updates. 
+        Additionally, I was responsible for designing and implementing the game's levels using game objects and given art assets.</p>
+      <p><strong>Tech:</strong> Unity, C#</p>
+
+      <div class="project-links">
+        <a href="https://play.unity.com/en/games/899d77f2-2da0-4b96-b89f-e9d9775a09a0/webgl-builds" target="_blank" rel="noopener noreferrer" class="links"><strong>Play (Web Build)</strong></a>
+        <span> • </span>
+        <a href="https://youtu.be/npi56Mp-PUE" target="_blank" rel="noopener noreferrer" class="links"><strong>Gameplay Video</strong></a>
+      </div>
+    </section>
+        <section class="process">
+      <h1>Process</h1>
+    <p><em>Boss One Prototype</em></p>
+        <img src="assets/gifs/laststick.gif" alt="The Last Stick Gameplay Screenshot" class="magejson">
+      <p><em>Boss Two Fight Prototype</em></p>
+        <video class="snowdash3" controls width="700" preload="metadata">
+            <source src="assets/videos/LastStickVideo1.mp4" type="video/mp4">
+        </video>
+        <p><em>Level Two Design</em></p>
+        <img src="assets/images/laststick3.png" alt="The Last Stick Gameplay Screenshot" class="snowdash3">
+        <h2><strong>Summary of Contributions</strong></h2>
+          <h3><em>Sword Stand Movement Mechanic</em></h3>
+          <p>On top of implementing the basic left and right basic player attacks, I implemented a sword stand movement mechanic that enables vertical mobility through external sword interactions by exposing a dedicated 
+            SwordJump() method. This method directly modifies the player's Rigidbody2D vertical velocity, allowing the mechanic to bypass standard grounded checks and internal jump state logic. 
+            Designed the system to be decoupled from the default jump pipeline, enabling it to be triggered by combat events such as sword collisions or abilities. This approach supports advanced movement techniques like mid-air repositioning and chaining mobility actions.</p>
+          <h3><em>Level One Boss</em></h3>
+          <p>Implemented a boss AI system using a state-driven architecture that dynamically switches between melee (ground slam), ranged (projectile throw), 
+            and recovery (weapon retrieval) behaviors based on player distance and internal state flags. The boss utilizes coroutine-based attack sequencing to 
+            synchronize animations, warning zones, and timed hitbox activation, ensuring clear player feedback and precise damage windows.</p>
+          <p>Developed a physics-integrated weapon system where the boss can throw a sword as a projectile with deterministic horizontal targeting, 
+            dynamic Rigidbody2D velocity control, and boomerang-style return logic. The sword transitions between multiple states (held, flying, stuck, returning), 
+            with collision-based state changes triggering retrieval behavior and reintegration into the boss's attack cycle.</p>
+          <p>Additionally, implemented collision filtering and movement constraints during attacks to enforce commitment and readability. 
+            This system tightly couples combat logic, animation state management, and physics interactions.</p>
+          <h3><em>Level Two Boss</em></h3>
+          <p>Developed a multi-phase boss AI system combining state-driven behavior, coroutine-based attack sequencing, and event-driven coordination across 
+            multiple subsystems. The boss dynamically transitions between movement, dash attacks, and large-scale summon attacks based on player distance, 
+            cooldown timers, and internal state flags, ensuring non-overlapping behaviors and clear combat readability.</p>
+          <p>Implemented a charge-based dash attack with direction locking, execution, and recovery phases. The system uses precise 
+            Rigidbody2D velocity control during execution and applies post-attack stun states to enforce commitment and balance risk/reward. Collision-based damage is applied to the player.</p>
+            <p>Designed a large-scale summon attack system that spawns a high volume of falling projectiles across the arena using evenly distributed positions with 
+            randomized sequencing (Fisher-Yates shuffle). Integrated event callbacks (onChargingChanged) to synchronize attack with animation states, improving player feedback and anticipation.</p>
+            <p>Additionally, built a coordinated floating sword subsystem that executes timed dive attack patterns using staggered coroutines, creating layered attack pressure. This system operates 
+            independently but in parallel with the boss controller.</p>
+          <h3><em>Level Two Design | Base Level Enemies</em></h3>
+          <p>Designed and implemented a vertically layered level focused on precision platforming and combat integration, utilizing physics-based traversal and 
+            systemic player feedback. Incorporated bounce materials on 2D colliders to create dynamic movement interactions, requiring players to manage momentum and 
+            positioning across multi-tiered apartment-style platforms.</p>
+          <p>Integrated a checkpoint/reset system that repositions the player upon failure and programmatically resets active enemy states 
+            (despawning flying sword enemies and clearing velocity), ensuring consistent retry conditions and maintaining gameplay flow.</p>
+          <p>Developed enemy encounters with state-driven AI, including melee and ranged variants that use distance-based behavior switching, 
+            coroutine-driven attacks, and cooldown-managed ability execution. Implemented ledge detection via raycasting to prevent 
+            enemies from falling off platforms, improving navigation reliability in a vertical environment.</p>
+          <p>designed traversal challenges that require mastery of the Sword Stand movement mechanic, including timed jumps and spacing-based sequences, 
+            reinforcing the core movement system through level design and creating a cohesive relationship between player mechanics and environment layout.</p>
+
+    </section>
+        <section class="process">
+      <h1>What I Learned</h1>
+          <h3><em>State-Driven AI and Coroutines</em></h3>
+          <p>Designing enemy and boss behaviors taught me how to structure state-driven systems using booleans, timers, and coroutines to manage complex attack patterns.</p>
+          <p>I learned how to sequence actions like charge-ups, attacks, and recovery phases while preventing overlap between states, which improved both gameplay clarity and code organization.</p>
+          <h3><em>Physics-Based Movement and Control</em></h3>
+          <p>Working with Rigidbody2D helped me understand how to achieve responsive and deterministic movement by directly controlling velocity instead of relying on forces.</p>
+          <p>I also gained experience with collision handling, hit detection, and conditional interactions, which are critical for tight combat systems.</p>
+          <p>This experience made me understand decoupled design patterns and how to build systems that are more flexible and clean.</p>
+          <h3><em>Modular System Design</em></h3>
+          <p>Building mechanics like the Sword Stand and multi-component boss systems reinforced the importance of decoupling systems.</p>
+          <p>By exposing functionality through public methods and events, I was able to connect movement, combat, and AI without tightly coupling scripts, making the systems more reusable and scalable.</p>
+          <h3><em>Level Design Integration</em></h3>
+          <p>Designing Level 2 helped me understand how to build environments that reinforce core mechanics.</p>
+          <p>By incorporating vertical platforming, bounce physics, and timed jumps requiring the Sword Stand mechanic, I learned how to guide players toward mastering movement systems through level layout.</p>
+    </section>
+  </main>
+</body>
+</html>
